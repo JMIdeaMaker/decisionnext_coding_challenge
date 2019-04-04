@@ -5,6 +5,7 @@ import requests
 import json
 import argparse
 from collections import OrderedDict
+from datetime import datetime
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--location', nargs=1)
@@ -19,11 +20,13 @@ user_set_location = (args.location != None)
 user_set_date = (args.date != None)
 
 if user_set_date:
+
+    datetime_object = datetime.strptime(args.date[0], '%m/%d/%Y')
+
     # set year, month, day
-    date_list = args.date[0].split('/')
-    year = date_list[2]
-    month = date_list[0]
-    day = date_list[1]
+    year = datetime_object.year
+    month = datetime_object.month
+    day = datetime_object.day
 
 
 if user_set_location:
