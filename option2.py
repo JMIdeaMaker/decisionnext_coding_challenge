@@ -1,44 +1,34 @@
 import os
+import sys
 import csv
 import requests
 import json
+import argparse
 from collections import OrderedDict
 
-print("Hi Parker. Welcome to my submission. We will be getting weather data based on the information you provide (or choose not to provide).")
+parser = argparse.ArgumentParser()
+parser.add_argument('--location', nargs=1)
+parser.add_argument('--date', nargs=1)
 
-# get whether user would like to set a location
-user_set_location = input(
-    "Would you like to set a location? 'y' for yes, 'n' for no: ")
+args = parser.parse_args()
 
-# use boolean for easier processing later on
-user_set_location = (user_set_location in ['y', 'Y', 'yes', 'Yes'])
+# did user set location?
+user_set_location = (args.location != None)
 
-# get location from user if user wanted to set a location
-if user_set_location:
-    location = input("Location: ")
-else:
-    print("You have chosen not to set a location. Default location is San Francisco. This location will be used.")
+# did user set date?
+user_set_date = (args.date != None)
 
-# get whether user would like to set a date
-user_set_date = input(
-    "Would you like to set a date? 'y' for yes, 'n' for no: ")
-
-# ''
-user_set_date = (user_set_date in ['y', 'Y', 'yes', 'Yes'])
-
-# get date from user if user wanted to set a date
 if user_set_date:
-    year = input("Year: ")
-    month = input("Month: ")
-    day = input("Day: ")
-else:
-    print("You have chosen not to set a date. You will get the weather for today and the next 5 days as a csv. Raw data is saved to a json file.")
+    date_list = args.date[0].split('/')
+    year = date_list[2]
+    month = date_list[0]
+    day = date_list[1]
 
 
 if user_set_location:
     # create location url using input location from user
     location_id_url = 'https://www.metaweather.com/api/location/search/?query=%s' % (
-        location)
+        args.location[0])
 
     # get woeid of location
     location_id = json.loads(requests.get(location_id_url).text)[0]['woeid']
