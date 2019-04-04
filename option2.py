@@ -19,6 +19,7 @@ user_set_location = (args.location != None)
 user_set_date = (args.date != None)
 
 if user_set_date:
+    # set year, month, day
     date_list = args.date[0].split('/')
     year = date_list[2]
     month = date_list[0]
