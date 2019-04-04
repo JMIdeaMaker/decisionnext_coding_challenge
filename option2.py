@@ -9,10 +9,8 @@ user_set_location = input(
     "Would you like to set a location? 'y' for yes, 'n' for no: ")
 
 # use boolean for easier processing later on
-if user_set_location == 'y':
-    user_set_location = True
-else:
-    user_set_location = False
+user_set_location = (user_set_location == 'y')
+
 # get location from user if user wanted to set a location
 if user_set_location:
     location = input("Location: ")
@@ -24,10 +22,7 @@ user_set_date = input(
     "Would you like to set a date? 'y' for yes, 'n' for no: ")
 
 # ''
-if user_set_date == 'y':
-    user_set_date = True
-else:
-    user_set_date = False
+user_set_date = (user_set_date == 'y')
 
 # get date from user if user wanted to set a date
 if user_set_date:
