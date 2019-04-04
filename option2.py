@@ -4,12 +4,14 @@ import requests
 import json
 from collections import OrderedDict
 
+print("Hi Parker. Welcome to my submission. We will be getting weather data based on the information you provide (or choose not to provide).")
+
 # get whether user would like to set a location
 user_set_location = input(
     "Would you like to set a location? 'y' for yes, 'n' for no: ")
 
 # use boolean for easier processing later on
-user_set_location = (user_set_location == 'y')
+user_set_location = (user_set_location in ['y', 'Y', 'yes', 'Yes'])
 
 # get location from user if user wanted to set a location
 if user_set_location:
@@ -22,7 +24,7 @@ user_set_date = input(
     "Would you like to set a date? 'y' for yes, 'n' for no: ")
 
 # ''
-user_set_date = (user_set_date == 'y')
+user_set_date = (user_set_date in ['y', 'Y', 'yes', 'Yes'])
 
 # get date from user if user wanted to set a date
 if user_set_date:
@@ -30,7 +32,7 @@ if user_set_date:
     month = input("Month: ")
     day = input("Day: ")
 else:
-    print("You have chosen not to set a date. You will get the weather for today and the next 5 days as a csv. Raw data is saved as a json file.")
+    print("You have chosen not to set a date. You will get the weather for today and the next 5 days as a csv. Raw data is saved to a json file.")
 
 
 if user_set_location:
